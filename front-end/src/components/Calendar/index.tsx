@@ -47,7 +47,7 @@ const Calendar = () => {
       firstRow.push(
         <CalendarCell
           key={dayCounter}
-          date={new Date(year, month, dayCounter)}
+          assignedDate={dayCounter}
           isSelected={selectedDate?.getDate() === dayCounter}
           onClick={() => setSelectedDate(new Date(year, month, dayCounter))}
         />

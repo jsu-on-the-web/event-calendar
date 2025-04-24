@@ -2,7 +2,6 @@ import React from 'react';
 import './index.css';
 
 interface CalendarCellProps {
-    key: number;
     assignedDate?: number;
     isSelected: boolean;
     onClick: () => void;
@@ -13,12 +12,11 @@ interface CalendarCellProps {
  * 
  * Their date numbers may be optional (e.g for days of the week outside the current month)
  *
- * @param {number} key Identifier for the cell
- * @param {?number} [assignedDate] Optional date number to be displayed in the cell
+ * @param {number} [assignedDate] Optional date number to be displayed in the cell
  */
-const CalendarCell = ({key, assignedDate, isSelected, onClick}: CalendarCellProps) => {
+const CalendarCell = ({ assignedDate, isSelected, onClick}: CalendarCellProps) => {
     return (
-        <td key={key}
+        <td 
             className={isSelected ? 'calendar-cell--selected' : 'calendar-cell'}
             onClick={onClick}
         >
