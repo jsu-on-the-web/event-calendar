@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CalendarCell from '../CalendarCell/index';
+import './index.scss';
 
 interface CalendarProps { }
 

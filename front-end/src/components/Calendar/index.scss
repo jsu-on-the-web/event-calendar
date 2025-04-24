@@ -1,0 +1,44 @@
+@import 'tailwindcss';
+@import '../../colors.scss';
+
+:root {
+    // Month Colors
+    --month-colors: (
+        january: #fdc3b6,
+        february: #f8b4d2,
+        march: #b5e3d8,
+        april: #c3d9f7,
+        may: #f9e2b8,
+        june: #f7c8e0,
+        july: #b8d8f9,
+        august: #d4f7c3,
+        september: #f7d3b8,
+        october: #f9b8c3,
+        november: #d8b8f9,
+        december: #b8e3f9
+    );
+
+    @each $month, $color in --month-colors {
+        --#{$month}-color: #{$color};
+    }
+    --accent-color: --january-color // January first as placeholder, set to the current month in Calendar component
+    width: 100vw;
+    height: 100vh;
+    display:flexbox;
+}
+
+.calendar {
+    border-radius: 4px;
+    background-color: $white-300;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between; // Put the header items left to right with equal space between
+    align-items: center;
+    padding: 16px;
+    background-color: --accent-color; // Different background color for header
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    width: 50vw;
+}

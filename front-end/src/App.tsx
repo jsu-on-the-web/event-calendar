@@ -1,12 +1,14 @@
 import './App.css'
+import Calendar from './components/Calendar'
 
 function App() {
 
   return (
     <>
-      <body>
+      {/* <body>
         <p>Hello world!</p>
-      </body>
+      </body> */}
+      <Calendar />
     </>
   )
 }
