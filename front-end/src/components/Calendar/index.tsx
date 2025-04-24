@@ -54,13 +54,54 @@ const Calendar = () => {
       );
       dayCounter++;
     }
+
+    calendar.push(<tr key={0}>{firstRow}</tr>);
+
+    // Fill in the rest of the rows with the days of the month
+    for (let i = 1; i < 6; i++) {
+      const row = [];
+      for (let j = 0; j < 7; j++) {
+        if (dayCounter > daysInMonth) break;
+        if (i === 5 && j > lastDayOfWeek) break;
+        row.push(
+          <CalendarCell
+            key={dayCounter}
+            assignedDate={dayCounter}
+            isSelected={selectedDate?.getDate() === dayCounter}
+            onClick={() => setSelectedDate(new Date(year, month, dayCounter))}
+          />
+        );
+        dayCounter++;
+      }
+      calendar.push(<tr key={i + 1}>{row}</tr>);
+    }
+    return calendar;
   };
 
   return (
     <div className="calendar">
       {/* Header with the current month and year, as well as arrows for moving back and forwards through the calendar */}
       <table>
-
+        <thead>
+          <tr>
+            <th colSpan={7} className="calendar-header">
+              <button
+                className="calendar-header__arrow"
+                onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1))}
+              >
+                &lt;
+              </button>
+              {currentDate.toLocaleString('default', { month: 'long' })} {currentDate.getFullYear()}
+              <button
+                className="calendar-header__arrow"
+                onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))}
+              >
+                &gt;
+              </button>
+            </th>
+          </tr>
+        </thead>
+        <tbody>{generateCalendar(currentDate)}</tbody>
       </table>
     </div>
   )
