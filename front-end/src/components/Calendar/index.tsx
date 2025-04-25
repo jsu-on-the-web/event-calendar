@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+
 import CalendarCell from '../CalendarCell/index';
 import './index.scss';
+
 
 interface CalendarProps { }
 
@@ -86,19 +90,17 @@ const Calendar = () => {
         <thead>
           <tr>
             <th colSpan={7} className="calendar-header">
-              <button
+              <FontAwesomeIcon
+                icon={faAngleLeft}
                 className="calendar-header__arrow"
                 onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1))}
-              >
-                &lt;
-              </button>
+              />
               {currentDate.toLocaleString('default', { month: 'long' })} {currentDate.getFullYear()}
-              <button
+              <FontAwesomeIcon
+                icon={faAngleRight}
                 className="calendar-header__arrow"
                 onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))}
-              >
-                &gt;
-              </button>
+              />
             </th>
           </tr>
         </thead>
