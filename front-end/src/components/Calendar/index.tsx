@@ -27,11 +27,14 @@ const Calendar = () => {
     const lastDayOfMonth = new Date(year, month + 1, 0);
     const daysInMonth = lastDayOfMonth.getDate();
     const firstDayOfWeek = firstDayOfMonth.getDay();
-    const lastDayOfWeek = lastDayOfMonth.getDay();
     const calendar = [];
     const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+    /**======================
+     **      Day Names
+     *========================**/
     const dayNamesRow = (
-      <tr key="day-names">
+      <tr key="day-names" className="calendar-header__day-names">
         {dayNames.map((dayName, index) => (
           <th key={index} className="calendar-header__day-name">
             {dayName}
@@ -40,46 +43,37 @@ const Calendar = () => {
       </tr>
     );
     calendar.push(dayNamesRow);
+
     let dayCounter = 1;
-    // Fill in the first row with empty cells until the first day of the month
-    const firstRow = [];
-    for (let i = 0; i < firstDayOfWeek; i++) {
-      firstRow.push(<td key={i} className="calendar-cell"></td>);
-    }
-    // Fill in the rest of the first row with the days of the month
-    for (let i = firstDayOfWeek; i < 7; i++) {
-      if (dayCounter > daysInMonth) break;
-      firstRow.push(
-        <CalendarCell
-          key={dayCounter}
-          assignedDate={dayCounter}
-          isSelected={selectedDate?.getDate() === dayCounter}
-          onClick={() => setSelectedDate(new Date(year, month, dayCounter))}
-        />
-      );
-      dayCounter++;
-    }
 
-    calendar.push(<tr key={0}>{firstRow}</tr>);
-
-    // Fill in the rest of the rows with the days of the month
-    for (let i = 1; i < 6; i++) {
+    /**======================
+     **      Days
+     *========================**/
+    for (let i = 0; i < 6; i++) { // Maximum of 6 rows in a calendar
       const row = [];
-      for (let j = 0; j < 7; j++) {
-        if (dayCounter > daysInMonth) break;
-        if (i === 5 && j > lastDayOfWeek) break;
-        row.push(
-          <CalendarCell
-            key={dayCounter}
-            assignedDate={dayCounter}
-            isSelected={selectedDate?.getDate() === dayCounter}
-            onClick={() => setSelectedDate(new Date(year, month, dayCounter))}
-          />
-        );
-        dayCounter++;
+      for (let j = 0; j < 7; j++) { // 7 days in a week
+        if (i === 0 && j < firstDayOfWeek) {
+          // Fill empty cells before the first day of the month
+          row.push(<CalendarCell key={`empty-${i}-${j}`} assignedDate={undefined} isSelected={false} onClick={() => { }} />);
+        } else if (dayCounter > daysInMonth) {
+          // Fill empty cells after the last day of the month
+          row.push(<CalendarCell key={`empty-${i}-${j}`} assignedDate={undefined} isSelected={false} onClick={() => { }} />);
+        } else {
+          // Fill cells with the days of the month
+          row.push(
+            <CalendarCell
+              key={dayCounter}
+              assignedDate={dayCounter}
+              isSelected={selectedDate?.getDate() === dayCounter}
+              onClick={() => setSelectedDate(new Date(year, month, dayCounter))}
+            />
+          );
+          dayCounter++;
+        }
       }
-      calendar.push(<tr key={i + 1}>{row}</tr>);
+      calendar.push(<tr key={i} className='calendar__calendar-row'>{row}</tr>);
     }
+
     return calendar;
   };
 
