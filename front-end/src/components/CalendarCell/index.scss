@@ -1,9 +1,6 @@
-:root {
-  color: rgba(0, 0, 0, 0.87);
-  background-color: #fff;
-}
+@import '../../colors.scss';
 
-.calendar-cell {
+@mixin calendar-cell($color) {
   display: table-cell;
   text-align: left;
   width: 14.28%; // 100% / 7 days = 14.28%
@@ -15,6 +12,15 @@
   font-weight: bold;
   border-width: 1px;
 }
+
+:root {
+  color: $black-600;
+  --cell-color: $white-300;
+}
+
+.calendar-cell {
+  @include calendar-cell(--cell-color);
+}
 .calendar-cell__date-number {
   color: rgb(32, 32, 32);
   font-size: 11pt;
@@ -23,5 +29,10 @@
   min-width: 10px;
   padding-top: 5px;
   padding-left: 5px;
+}
+
+.calendar-cell--selected {
+  @include calendar-cell($white-500);
+  background-color: $black-100;
 }
 
