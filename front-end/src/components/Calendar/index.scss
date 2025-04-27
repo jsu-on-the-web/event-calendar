@@ -52,7 +52,6 @@
 
 .calendar__calendar-row {
     @include rowStyles;
-    padding: 16px;
     width: 100%;
     background-color: $white-300;
 
