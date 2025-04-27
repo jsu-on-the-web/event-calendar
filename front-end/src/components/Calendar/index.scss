@@ -1,5 +1,6 @@
 @import 'tailwindcss';
 @import '../../colors.scss';
+@import '../../fonts.scss';
 
 @mixin rowStyles {
     display: flex;
@@ -63,6 +64,7 @@
     padding: 16px;
     background-color: --accent-color; // Different background color for header
     width: 50vw;
+    font-family: 'Montserrat', sans-serif;
 }
 
 
@@ -70,7 +72,8 @@
     @include rowStyles;
     padding: 16px;
     background-color: $white-300;
-    border-bottom: 1px solid ;
+    border-bottom: 1px solid $black-200;
+    font-family: 'Average Sans', sans-serif;
 }
 .calendar-header__arrow {
     color: $black-500;
