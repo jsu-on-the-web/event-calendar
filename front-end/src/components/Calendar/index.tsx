@@ -62,7 +62,7 @@ const Calendar = () => {
         } else {
           // Fill cells with the days of the month
           const cellsDate = dayCounter; // ! NOTE: Since JS/TS captures variables by reference not value, we need to create a new variable for each cell
-          // Makes sure that the cell uses the correct date for each part that needs it. Using dayCounter directly = using the same value for all cells
+          // Makes sure that the cell uses the correct date for each part that needs it. Using dayCounter directly = using the same final value of dayCounter for all cells once the loop ends
           row.push(
             <CalendarCell
               key={cellsDate}
