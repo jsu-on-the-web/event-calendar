@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,7 +10,7 @@ interface CalendarProps { }
 
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedDate, setSelectedDate] = useState<number | undefined>(undefined);
 
   /* -------------------------------------------------------------------------- */
   /*                           Constructors/Generators                          */
@@ -23,8 +23,9 @@ const Calendar = () => {
     // Rendering the calendar requires the current month and year
     const month = date.getMonth();
     const year = date.getFullYear();
+    // Calculations
     const firstDayOfMonth = new Date(year, month, 1);
-    const lastDayOfMonth = new Date(year, month + 1, 0);
+    const lastDayOfMonth = new Date(year, month + 1, 0); // The zero-th day of next month is last day of this month
     const daysInMonth = lastDayOfMonth.getDate();
     const firstDayOfWeek = firstDayOfMonth.getDay();
     const calendar = [];
@@ -44,7 +45,7 @@ const Calendar = () => {
     );
     calendar.push(dayNamesRow);
 
-    let dayCounter = 1;
+    let dayCounter = 1; // Counter through the days of the month
 
     /**======================
      **      Days
@@ -54,29 +55,62 @@ const Calendar = () => {
       for (let j = 0; j < 7; j++) { // 7 days in a week
         if (i === 0 && j < firstDayOfWeek) {
           // Fill empty cells before the first day of the month
-          row.push(<CalendarCell key={`empty-${i}-${j}`} assignedDate={undefined} isSelected={false} onClick={() => { }} />);
+          row.push(<CalendarCell key={`empty-row-${i}-day-${j}`} assignedDate={undefined} isSelected={false} onClick={() => { }} />);
         } else if (dayCounter > daysInMonth) {
           // Fill empty cells after the last day of the month
-          row.push(<CalendarCell key={`empty-${i}-${j}`} assignedDate={undefined} isSelected={false} onClick={() => { }} />);
+          row.push(<CalendarCell key={`empty-row-${i}-day-${j}`} assignedDate={undefined} isSelected={false} onClick={() => { }} />);
         } else {
           // Fill cells with the days of the month
+          const cellsDate = dayCounter; // ! NOTE: Since JS/TS captures variables by reference not value, we need to create a new variable for each cell
+          // Makes sure that the cell uses the correct date for each part that needs it. Using dayCounter directly = using the same value for all cells
           row.push(
             <CalendarCell
-              key={dayCounter}
-              assignedDate={dayCounter}
-              isSelected={selectedDate?.getDate() === dayCounter}
-              onClick={() => setSelectedDate(new Date(year, month, dayCounter))}
+              key={cellsDate}
+              assignedDate={cellsDate}
+              isSelected={selectedDate === cellsDate}
+              onClick={() => {
+                setSelectedDate(cellsDate);
+                console.log(`Selected date: ${cellsDate}`);
+              }}
             />
           );
+          console.log(`Added cell with date ${dayCounter}`);
+          console.log(new Date(year, month, dayCounter));
           dayCounter++;
         }
       }
+      console.table(row);
       calendar.push(<tr key={i} className='calendar__calendar-row'>{row}</tr>);
     }
 
     return calendar;
   };
 
+  /**--------------------------------------------
+   **               Other Functions
+   *---------------------------------------------**/
+  // Change the selected date when a cell is clicked
+  useEffect(() => {
+    if (selectedDate) {
+      console.log(`Selected date changed to ${selectedDate}`);
+
+      // First remove the selected class from the currently selected cell if present
+      const previouslySelectedCell = document.querySelector('.calendar-cell--selected');
+
+      if (previouslySelectedCell) {
+        previouslySelectedCell.classList.remove('calendar-cell--selected');
+        previouslySelectedCell.classList.add('calendar-cell');
+        console.log(`Removed selected class from cell with date ${previouslySelectedCell.getAttribute('data-assigned-date')}`);
+      }
+
+      // Look for the cell with the same date as the selected date
+      const selectedCell = document.querySelector(`.calendar-cell[data-assigned-date="${selectedDate}"]`); 
+      if (selectedCell) {
+        selectedCell.classList.add('calendar-cell--selected');
+        console.log(`Added selected class to ${selectedCell.getAttribute('data-assigned-date')}`);
+      }
+    }
+  }, [selectedDate]);
   return (
     <div className="calendar">
       {/* Header with the current month and year, as well as arrows for moving back and forwards through the calendar */}

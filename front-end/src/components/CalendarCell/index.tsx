@@ -19,6 +19,7 @@ const CalendarCell = ({ assignedDate, isSelected, onClick}: CalendarCellProps) =
         <td 
             className={isSelected ? 'calendar-cell--selected' : 'calendar-cell'}
             onClick={onClick}
+            {...(assignedDate !== undefined && { 'data-assigned-date': assignedDate })} // Only set the data attribute if assignedDate is defined
         >
             {assignedDate ? (<span className='calendar-cell__date-number'>{assignedDate}</span>) : <span className='calendar-cell__date-number'></span>}
         </td>
