@@ -4,20 +4,23 @@
 }
 
 .calendar-cell {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  display: table-cell;
+  text-align: left;
+  width: 14.28%; // 100% / 7 days = 14.28%
+  height: 100%;
   min-width: 50px;
   min-height: 50px;
   border-radius: 4px;
   border-color: rgba(0, 0, 0, 0.12);
   font-size: 14px;
   font-weight: bold;
+  border-width: 1px;
 }
 .calendar-cell__date-number {
   color: rgb(32, 32, 32);
   font-size: 11pt;
   font-weight: bold;
   align-self: flex-start;
+  min-width: 10px;
 }
 

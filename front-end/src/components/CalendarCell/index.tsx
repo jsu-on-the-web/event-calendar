@@ -20,7 +20,7 @@ const CalendarCell = ({ assignedDate, isSelected, onClick}: CalendarCellProps) =
             className={isSelected ? 'calendar-cell--selected' : 'calendar-cell'}
             onClick={onClick}
         >
-            {assignedDate ? (<span className='calendar-cell__date-number'>{assignedDate}</span>) : null}
+            {assignedDate ? (<span className='calendar-cell__date-number'>{assignedDate}</span>) : <span className='calendar-cell__date-number'></span>}
         </td>
     )
  }

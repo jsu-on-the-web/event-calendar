@@ -1,5 +1,5 @@
 @import "tailwindcss";
-
+@import 'colors.scss';
 
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -60,7 +60,7 @@ button:focus-visible {
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
-    background-color: #ffffff;
+    background-color: $white-900;
   }
   a:hover {
     color: #747bff;

@@ -83,7 +83,7 @@ const Calendar = () => {
       <table>
         <thead>
           <tr>
-            <th colSpan={7} className="calendar-header">
+            <th colSpan={7} className="calendar__header">
               <FontAwesomeIcon
                 icon={faAngleLeft}
                 className="calendar-header__arrow"

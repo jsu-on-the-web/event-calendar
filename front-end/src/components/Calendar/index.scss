@@ -4,7 +4,11 @@
 @mixin rowStyles {
     display: flex;
     flex-direction: row;
-    justify-content: space-between; // Put the calendar items left to right with equal space between
+    justify-content: space-around;
+}
+
+@mixin headerBorders {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 }
 
 :root {
@@ -40,29 +44,39 @@
     max-width: 80vw;
     display: flex;
     flex-direction: row;
+    border-collapse: collapse;
 }
+
+
 
 .calendar__calendar-row {
     @include rowStyles;
     padding: 16px;
+    width: 100%;
     background-color: $white-300;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+
 }
 
-.calendar-header {
+.calendar__header {
     @include rowStyles;
+    @include headerBorders;
     padding: 16px;
     background-color: --accent-color; // Different background color for header
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     width: 50vw;
 }
+
+
 .calendar-header__day-names {
     @include rowStyles;
     padding: 16px;
     background-color: $white-300;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+    border-bottom: 1px solid ;
 }
 .calendar-header__arrow {
     color: $black-500;
     font-size: 24px;
+    transition: color 0.3s ease;
+}
+.calendar-header__arrow:hover {
+    color: $black-300;
 }
