@@ -1,0 +1,34 @@
+/**========================================================================
+ * *                                INFO
+ *   A default modal component that can be used to display any content.
+ *   Add the content you want to display in the modal as children.
+ *   The height and width of the modal can be set using the height and width props.
+ *   The modal can be closed by clicking the close button or by clicking outside the modal.
+ *========================================================================**/
+
+import React, { useEffect } from 'react';
+import './index.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faXmark } from '@fortawesome/free-solid-svg-icons';
+
+interface ModalProps { 
+    children: React.ReactNode;
+    height?: string;
+    width?: string;
+    onClose: () => void;
+};
+
+const Modal = ({ children, height, width, onClose }: ModalProps) => {
+    return ( 
+        <div className="w-1/4 h-1/2 modal" onClick={onClose}>
+            <div className="modal__content" style={{ height: height, width: width }} onClick={(e) => e.stopPropagation()}>
+                <button className="modal__close-button" onClick={onClose}>
+                    <FontAwesomeIcon icon={faXmark} />
+                </button>
+                {children}
+            </div>
+        </div>
+    );
+ };
+
+export default Modal;

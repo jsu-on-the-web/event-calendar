@@ -20,6 +20,7 @@
 
 .calendar-cell {
   @include calendar-cell(--cell-color);
+  transition: background-color 0.1s ease-in-out;
 }
 .calendar-cell__date-number {
   color: rgb(32, 32, 32);

@@ -70,16 +70,12 @@ const Calendar = () => {
               isSelected={selectedDate === cellsDate}
               onClick={() => {
                 setSelectedDate(cellsDate);
-                console.log(`Selected date: ${cellsDate}`);
               }}
             />
           );
-          console.log(`Added cell with date ${dayCounter}`);
-          console.log(new Date(year, month, dayCounter));
           dayCounter++;
         }
       }
-      console.table(row);
       calendar.push(<tr key={i} className='calendar__calendar-row'>{row}</tr>);
     }
 
@@ -92,22 +88,18 @@ const Calendar = () => {
   // Change the selected date when a cell is clicked
   useEffect(() => {
     if (selectedDate) {
-      console.log(`Selected date changed to ${selectedDate}`);
-
       // First remove the selected class from the currently selected cell if present
       const previouslySelectedCell = document.querySelector('.calendar-cell--selected');
 
       if (previouslySelectedCell) {
         previouslySelectedCell.classList.remove('calendar-cell--selected');
         previouslySelectedCell.classList.add('calendar-cell');
-        console.log(`Removed selected class from cell with date ${previouslySelectedCell.getAttribute('data-assigned-date')}`);
       }
 
       // Look for the cell with the same date as the selected date
       const selectedCell = document.querySelector(`.calendar-cell[data-assigned-date="${selectedDate}"]`); 
       if (selectedCell) {
         selectedCell.classList.add('calendar-cell--selected');
-        console.log(`Added selected class to ${selectedCell.getAttribute('data-assigned-date')}`);
       }
     }
   }, [selectedDate]);
@@ -121,13 +113,19 @@ const Calendar = () => {
               <FontAwesomeIcon
                 icon={faAngleLeft}
                 className="calendar-header__arrow"
-                onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1))}
+                onClick={() => {
+                  setSelectedDate(undefined);
+                  setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1));
+                }}
               />
               {currentDate.toLocaleString('default', { month: 'long' })} {currentDate.getFullYear()}
               <FontAwesomeIcon
                 icon={faAngleRight}
                 className="calendar-header__arrow"
-                onClick={() => setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1))}
+                onClick={() => {
+                  setSelectedDate(undefined);
+                  setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1));
+                }}
               />
             </th>
           </tr>
