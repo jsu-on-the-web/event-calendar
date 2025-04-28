@@ -1,6 +1,6 @@
 @import '../../colors.scss';
 
-@mixin calendar-cell($color) {
+@mixin calendar-cell {
   display: table-cell;
   text-align: left;
   width: 14.28%; // 100% / 7 days = 14.28%
@@ -19,11 +19,11 @@
 }
 
 .calendar-cell {
-  @include calendar-cell(--cell-color);
+  @include calendar-cell;
   transition: background-color 0.1s ease-in-out;
 }
 .calendar-cell__date-number {
-  color: rgb(32, 32, 32);
+  color: $black-600;
   font-size: 11pt;
   font-weight: bold;
   align-self: flex-start;
@@ -33,7 +33,7 @@
 }
 
 .calendar-cell--selected {
-  @include calendar-cell($white-500);
+  @include calendar-cell;
   background-color: $black-100;
 }
 

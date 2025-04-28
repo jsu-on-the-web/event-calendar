@@ -103,6 +103,19 @@ const Calendar = () => {
       }
     }
   }, [selectedDate]);
+
+  // Change month header color when the month changes
+  useEffect(() => {
+    const header = document.querySelector('.calendar__header');
+    const monthNames = ['january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september', 'october', 'november', 'december'];
+    // Use the month name to determine the color, colors are defined in the SCSS file
+    if (header) {
+      const monthName = monthNames[currentDate.getMonth()];
+      header.className = `calendar__header calendar__header--${monthName}`;
+      console.log(`Header class changed to calendar__header--${monthName}`);
+    }
+  }, [currentDate]);
+
   return (
     <div className="calendar">
       {/* Header with the current month and year, as well as arrows for moving back and forwards through the calendar */}

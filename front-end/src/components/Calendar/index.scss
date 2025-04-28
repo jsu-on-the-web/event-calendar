@@ -13,31 +13,27 @@
 }
 
 :root {
-    // Month Colors
-    --month-colors: (
-        january: #fdc3b6,
-        february: #f8b4d2,
-        march: #b5e3d8,
-        april: #c3d9f7,
-        may: #f9e2b8,
-        june: #f7c8e0,
-        july: #b8d8f9,
-        august: #d4f7c3,
-        september: #f7d3b8,
-        october: #f9b8c3,
-        november: #d8b8f9,
-        december: #b8e3f9
-    );
-
-    @each $month, $color in --month-colors {
-        --#{$month}-color: #{$color};
-    }
-    --accent-color: --january-color // January first as placeholder, set to the current month in Calendar component
     max-width: 100vw;
     max-height: 100vh;
-    display:flex;
+    display: flex;
     justify-content: center;
 }
+
+// Month Colors
+$month-colors: (
+    january: #fdc3b6,
+    february: #f8b4d2,
+    march: #b5e3d8,
+    april: #c3d9f7,
+    may: #f9e2b8,
+    june: #f7c8e0,
+    july: #b8d8f9,
+    august: #d4f7c3,
+    september: #f7d3b8,
+    october: #f9b8c3,
+    november: #d8b8f9,
+    december: #b8e3f9
+);
 
 .calendar {
     border-radius: 4px;
@@ -62,20 +58,19 @@
     @include rowStyles;
     @include headerBorders;
     padding: 16px;
-    background-color: --accent-color; // Different background color for header
+    background-color: $white-300; // Placeholder for month color
+    transition: background-color 0.3s ease-in-out;
     width: 50vw;
     font-family: 'Montserrat', sans-serif;
 }
 
-.calendar-header__day-name {
-    display: table-cell;
-    width: 14.28%; // 100% / 7 days = 14.28%
-    text-align: center;
-    font-size: 16px;
-    font-weight: bold;
-    color: $black-500;
+// Month Header Colors (using the month colors defined in :root)
+// NOTE: This is an SCSS map, for iterating through $month-colors! the first value is the key, the second is the value. 
+@each $month, $color in $month-colors {
+    .calendar__header--#{$month} {
+        background-color: $color;
+    }
 }
-
 
 .calendar-header__day-names {
     @include rowStyles;
