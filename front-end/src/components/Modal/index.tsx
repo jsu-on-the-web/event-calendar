@@ -8,6 +8,7 @@
 
 import React, { useEffect } from 'react';
 import './index.scss';
+import './functions.ts'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
 
