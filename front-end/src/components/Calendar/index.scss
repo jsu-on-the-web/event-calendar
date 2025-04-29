@@ -2,6 +2,10 @@
 @import '../../colors.scss';
 @import '../../fonts.scss';
 
+/*
+ * Mixins and Other Constants
+ */
+
 @mixin rowStyles {
     display: flex;
     flex-direction: row;
@@ -10,13 +14,6 @@
 
 @mixin headerBorders {
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-}
-
-:root {
-    max-width: 100vw;
-    max-height: 100vh;
-    display: flex;
-    justify-content: center;
 }
 
 // Month Colors
@@ -34,6 +31,21 @@ $month-colors: (
     november: #d8b8f9,
     december: #b8e3f9
 );
+
+/*
+ * Global Styles
+ */
+
+:root {
+    max-width: 100vw;
+    max-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+/*
+ * Class Names
+ */
 
 .calendar {
     border-radius: 4px;

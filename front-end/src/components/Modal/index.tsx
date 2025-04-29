@@ -20,7 +20,7 @@ interface ModalProps {
 
 const Modal = ({ children, height, width, onClose }: ModalProps) => {
     return ( 
-        <div className="w-1/4 h-1/2 modal" onClick={onClose}>
+        <div className="w-1/6 modal h-1/3" onClick={onClose}>
             <div className="modal__content" style={{ height: height, width: width }} onClick={(e) => e.stopPropagation()}>
                 <button className="modal__close-button" onClick={onClose}>
                     <FontAwesomeIcon icon={faXmark} />
