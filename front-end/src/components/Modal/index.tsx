@@ -22,12 +22,13 @@ interface ModalProps {
 const Modal = ({ children, height, width, onClose }: ModalProps) => {
     return ( 
         <div className="w-1/6 modal h-1/3" onClick={onClose}>
-            <div className="modal__content" style={{ height: height, width: width }} onClick={(e) => e.stopPropagation()}>
+            <article className="modal__content" style={{ height: height, width: width }} onClick={(e) => e.stopPropagation()}>
                 <button className="modal__close-button" onClick={onClose}>
                     <FontAwesomeIcon icon={faXmark} />
                 </button>
                 {children}
-            </div>
+                <div className='modal__resize-handle' />
+            </article>
         </div>
     );
  };

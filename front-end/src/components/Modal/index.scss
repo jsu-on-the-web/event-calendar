@@ -62,3 +62,16 @@
     height: 10px;
     color: $black-600;
 }
+
+.modal__resize-handle {
+    /* Create a triangle pointing outward to the bottom-right corner (left is transparent, bottom is solid */
+    border-left: 15px solid transparent;
+    border-bottom: 15px solid #ccc;
+    width: 0;
+    height: 0;
+    /* Position the handle at the bottom-right corner of the modal */
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    cursor: se-resize;
+}
