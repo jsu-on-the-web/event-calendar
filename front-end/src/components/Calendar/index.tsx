@@ -4,13 +4,20 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
 import CalendarCell from '../CalendarCell/index';
 import './index.scss';
+import { useModal } from '../../contexts/ModalContext';
 
 
 interface CalendarProps { }
 
 const Calendar = () => {
+  const { showModal, openModal } = useModal();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<number | undefined>(undefined);
+
+  const handleCellClick = (date: number) => { 
+    setSelectedDate(date);
+    openModal();
+  };
 
   /* -------------------------------------------------------------------------- */
   /*                           Constructors/Generators                          */
@@ -68,9 +75,7 @@ const Calendar = () => {
               key={cellsDate}
               assignedDate={cellsDate}
               isSelected={selectedDate === cellsDate}
-              onClick={() => {
-                setSelectedDate(cellsDate);
-              }}
+              onClick={() => handleCellClick(cellsDate)}
             />
           );
           dayCounter++;

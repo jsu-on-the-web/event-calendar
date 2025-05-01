@@ -1,8 +1,7 @@
-
 // Surround the code with a DOMContentLoaded event listener; it makes sure that the DOM is
 // loaded before grabbing the elements
 document.addEventListener('DOMContentLoaded', () => { 
-        /**------------------------------------------------------------------------
+    /**------------------------------------------------------------------------
      *                           Variables
      *------------------------------------------------------------------------**/
 
@@ -10,10 +9,24 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalOverlay = document.querySelector('.modal__overlay') as HTMLDivElement;
     const modalResizeHandle = document.querySelector('.modal__resize-handle') as HTMLDivElement;
     const closeButton = document.querySelector('.modal__close-button') as HTMLButtonElement;
+    const openButton = document.querySelector('.open-modal-button') as HTMLButtonElement; // Temp open button 
+
 
     /**========================================================================
      **                            Functions
     *========================================================================**/
+
+    // Function to open the modal
+    const openModal = () => {
+        modal.style.display = 'block'; 
+        modalOverlay.style.display = 'block'; 
+        modal.showModal(); 
+        modalOverlay.style.pointerEvents = 'auto'; // Enable pointer events
+        console.log('Modal:', modal);
+        console.log('Modal Overlay:', modalOverlay);
+        console.log('Close Button:', closeButton);
+        console.log('Resize Handle:', modalResizeHandle);
+    };
 
     /** 
      * Function to move the modal when the user drags it around
@@ -49,9 +62,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeModal = (e: MouseEvent) => {
         e.preventDefault();
         // Check if the user clicked outside the modal
-        if (e.target === modalOverlay) {
+        if (e.target === modalOverlay || e.target === closeButton) {
             // Close the modal
             modal.close();
+            modal.style.display = 'none';
             modalOverlay.style.display = 'none';
             modalOverlay.removeEventListener('click', closeModal);
             // Let the user click through the modal
@@ -86,6 +100,13 @@ document.addEventListener('DOMContentLoaded', () => {
     /**========================================================================
      *                           Listeners
      *========================================================================**/
+
+    // Open the modal when the open button is clicked
+    openButton.addEventListener('click', openModal);
+
+    // Close the modal when clicking outside or on the close button
+    modalOverlay.addEventListener('click', closeModal);
+    closeButton.addEventListener('click', closeModal);
 
     // Add event listeners to the modal
     modal.addEventListener('mousedown', (e) => {

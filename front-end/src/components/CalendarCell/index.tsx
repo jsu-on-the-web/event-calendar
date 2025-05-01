@@ -14,7 +14,7 @@ interface CalendarCellProps {
  *
  * @param {number} [assignedDate] Optional date number to be displayed in the cell
  */
-const CalendarCell = ({ assignedDate, isSelected, onClick}: CalendarCellProps) => {
+const CalendarCell = ({ assignedDate, isSelected, onClick }: CalendarCellProps) => {
     return (
         <td 
             className={isSelected ? 'calendar-cell--selected' : 'calendar-cell'}
