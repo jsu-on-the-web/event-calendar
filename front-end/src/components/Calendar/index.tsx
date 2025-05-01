@@ -5,6 +5,7 @@ import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import CalendarCell from '../CalendarCell/index';
 import './index.scss';
 import { useModal } from '../../contexts/ModalContext';
+import { useSelectedDate } from '../../contexts/SelectedDateContext';
 
 
 interface CalendarProps { }
@@ -12,7 +13,7 @@ interface CalendarProps { }
 const Calendar = () => {
   const { openModal } = useModal();
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState<number | undefined>(undefined);
+  const { selectedDate, setSelectedDate } = useSelectedDate();
 
   const handleCellClick = (date: number) => { 
     setSelectedDate(date);

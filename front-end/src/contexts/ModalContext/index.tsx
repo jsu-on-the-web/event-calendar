@@ -1,4 +1,5 @@
 import React, { createContext, ReactNode } from 'react';
+import { useSelectedDate } from '../SelectedDateContext';
 
 interface ModalContextContextProps { 
   showModal: boolean;
@@ -7,10 +8,11 @@ interface ModalContextContextProps {
   closeModal: () => void;
  }
 
-export const ModalContextContext = createContext<ModalContextContextProps>({} as ModalContextContextProps);
+export const ModalContext = createContext<ModalContextContextProps>({} as ModalContextContextProps);
 
 export const ModalContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [showModal, setShowModal] = React.useState(false);
+  const { setSelectedDate } = useSelectedDate();
   const openModal = () => {
     console.log('Opening modal');
     setShowModal(true);
@@ -18,6 +20,7 @@ export const ModalContextProvider: React.FC<{ children: ReactNode }> = ({ childr
   const closeModal = () => {
     console.log('Closing modal');
     setShowModal(false);
+    setSelectedDate(undefined); // Reset selected date when closing the modal
   }
 
   const value = {
@@ -28,15 +31,15 @@ export const ModalContextProvider: React.FC<{ children: ReactNode }> = ({ childr
   };
 
   return (
-    <ModalContextContext.Provider value={value}>
+    <ModalContext.Provider value={value}>
       {children}
-    </ModalContextContext.Provider>
+    </ModalContext.Provider>
   );
 };
 
 // The hook
 export const useModal  = () => {
-  const context = React.useContext(ModalContextContext);
+  const context = React.useContext(ModalContext);
   if (!context) {
     throw new Error('useModalContext must be used within a ModalContextProvider');
   }
