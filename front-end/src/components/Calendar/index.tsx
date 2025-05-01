@@ -10,7 +10,7 @@ import { useModal } from '../../contexts/ModalContext';
 interface CalendarProps { }
 
 const Calendar = () => {
-  const { showModal, openModal } = useModal();
+  const { openModal } = useModal();
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState<number | undefined>(undefined);
 

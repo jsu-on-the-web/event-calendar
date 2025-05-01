@@ -11,8 +11,14 @@ export const ModalContextContext = createContext<ModalContextContextProps>({} as
 
 export const ModalContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [showModal, setShowModal] = React.useState(false);
-  const openModal = () => setShowModal(true);
-  const closeModal = () => setShowModal(false);
+  const openModal = () => {
+    console.log('Opening modal');
+    setShowModal(true);
+  };
+  const closeModal = () => {
+    console.log('Closing modal');
+    setShowModal(false);
+  }
 
   const value = {
     showModal,
@@ -28,6 +34,7 @@ export const ModalContextProvider: React.FC<{ children: ReactNode }> = ({ childr
   );
 };
 
+// The hook
 export const useModal  = () => {
   const context = React.useContext(ModalContextContext);
   if (!context) {

@@ -1,8 +1,7 @@
-import { useState } from 'react';
 import './App.css'
 import Calendar from './components/Calendar'
 import Modal from './components/Modal'
-import ModalContextProvider, { useModal } from './contexts/ModalContext';
+import { useModal } from './contexts/ModalContext';
 
 function App() {
   const { showModal, openModal, closeModal } = useModal();
@@ -11,7 +10,6 @@ function App() {
       {/* <body>
         <p>Hello world!</p>
       </body> */}
-      <ModalContextProvider>
         <Calendar />
         {showModal && (<Modal children={<p>Hello world!</p>} onClose={closeModal} />)}
 
@@ -21,7 +19,6 @@ function App() {
         >
           Test Button
         </button>
-      </ModalContextProvider>
     </>
   )
 }
