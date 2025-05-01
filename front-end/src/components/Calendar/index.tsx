@@ -85,15 +85,15 @@ const Calendar = ({ setModalPosition } : CalendarProps) => {
     /**======================
      **      Days
      *========================**/
-    for (let i = 0; i < 6; i++) { // Maximum of 6 rows in a calendar
+    for (let week = 0; week < 6; week++) { // Maximum of 6 rows in a calendar
       const row = [];
-      for (let j = 0; j < 7; j++) { // 7 days in a week
-        if (i === 0 && j < firstDayOfWeek) {
+      for (let day = 0; day < 7; day++) { // 7 days in a week
+        if (week === 0 && day < firstDayOfWeek) {
           // Fill empty cells before the first day of the month
-          row.push(<CalendarCell key={`empty-row-${i}-day-${j}`} assignedDate={undefined} isSelected={false} onClick={() => { }} />);
+          row.push(<CalendarCell key={`empty-row-${week}-day-${day}`} assignedDate={undefined} isSelected={false} onClick={() => { }} />);
         } else if (dayCounter > daysInMonth) {
           // Fill empty cells after the last day of the month
-          row.push(<CalendarCell key={`empty-row-${i}-day-${j}`} assignedDate={undefined} isSelected={false} onClick={() => { }} />);
+          row.push(<CalendarCell key={`empty-row-${week}-day-${day}`} assignedDate={undefined} isSelected={false} onClick={() => { }} />);
         } else {
           // Fill cells with the days of the month
           const cellsDate = dayCounter; // ! NOTE: Since JS/TS captures variables by reference not value, we need to create a new variable for each cell
@@ -109,7 +109,7 @@ const Calendar = ({ setModalPosition } : CalendarProps) => {
           dayCounter++;
         }
       }
-      calendar.push(<tr key={i} className='calendar__calendar-row'>{row}</tr>);
+      calendar.push(<tr key={week} className='calendar__calendar-row'>{row}</tr>);
     }
 
     return calendar;
