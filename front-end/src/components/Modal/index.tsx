@@ -6,7 +6,7 @@
  *   The modal can be closed by clicking the close button or by clicking outside the modal.
  *========================================================================**/
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import './index.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faXmark } from '@fortawesome/free-solid-svg-icons';
@@ -16,9 +16,13 @@ interface ModalProps {
     height?: string;
     width?: string;
     onClose: () => void;
+    position?: {
+        top?: number;
+        left?: number;
+    }
 };
 
-const Modal = ({ children, height, width, onClose }: ModalProps) => {
+const Modal = ({ children, height, width, onClose, position }: ModalProps) => {
     /**========================================================================
      *                      Consts, Vars, and States
      *========================================================================**/
@@ -96,7 +100,12 @@ const Modal = ({ children, height, width, onClose }: ModalProps) => {
 
     return ( 
         <div className="modal__overlay" onClick={handleOverlayClick} >
-            <dialog className="w-1/6 modal h-1/3" onClick={onClose} ref={modalRef} onMouseDown={handleDragModal}>
+            <dialog className="w-1/6 modal h-1/3" onClick={onClose} ref={modalRef} onMouseDown={handleDragModal} style={
+                position? {
+                    top: `${position.top}px`,
+                    left: `${position.left}px` 
+                    } : { } }
+            >
                 <article className="modal__content" style={{ height: height, width: width }} onClick={(e) => e.stopPropagation()}>
                     <button className="modal__close-button" onClick={onClose}>
                         <FontAwesomeIcon icon={faXmark} />

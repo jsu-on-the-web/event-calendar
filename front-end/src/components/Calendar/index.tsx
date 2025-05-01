@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 
@@ -8,15 +8,42 @@ import { useModal } from '../../contexts/ModalContext';
 import { useSelectedDate } from '../../contexts/SelectedDateContext';
 
 
-interface CalendarProps { }
+interface CalendarProps { 
+  setModalPosition: (position: { top: number; left: number }) => void;
+}
 
-const Calendar = () => {
+const Calendar = ({ setModalPosition } : CalendarProps) => {
   const { openModal } = useModal();
   const [currentDate, setCurrentDate] = useState(new Date());
   const { selectedDate, setSelectedDate } = useSelectedDate();
 
   const handleCellClick = (date: number) => { 
     setSelectedDate(date);
+    // Get the cell element that was clicked
+    const cellElement = document.querySelector(`.calendar-cell[data-assigned-date="${date}"]`) as HTMLElement;
+    if (cellElement) {
+      // Get the position of the cell element
+      const rect = cellElement.getBoundingClientRect();
+      // By default, the modal should be positioned at the bottom right of the cell, unless it's too close to the bottom or right edge of the screen
+      // In that case, we push it up and/or left to fit it in the screen
+      let modalTop = rect.bottom + window.scrollY;
+      let modalLeft = rect.right + window.scrollX; 
+
+      const modalWidth = 200; // Average width of the modal
+      const modalHeight = 300; // Average height of the modal
+
+      // Check if the modal goes out of the screen
+      if (modalTop + modalHeight > window.innerHeight) { 
+        modalTop = rect.top + window.scrollY - modalHeight; 
+      }
+      if (modalLeft + modalWidth > window.innerWidth) {
+        modalLeft = rect.left + window.scrollX - modalWidth; 
+      }
+
+      const position = { top: modalTop, left: modalLeft };
+      setModalPosition(position);
+    }
+    // Open the modal
     openModal();
   };
 
