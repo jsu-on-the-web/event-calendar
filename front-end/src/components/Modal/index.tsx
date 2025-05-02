@@ -106,10 +106,15 @@ const Modal = ({ children, height, width, onClose, position }: ModalProps) => {
                     left: `${position.left}px` 
                     } : { } }
             >
-                <article className="modal__content" style={{ height: height, width: width }} onClick={(e) => e.stopPropagation()}>
+                {/* Header with close button */}
+                <header className="modal__header">
+                    <h2 className="modal__title">Modal Title</h2>
                     <button className="modal__close-button" onClick={onClose}>
                         <FontAwesomeIcon icon={faXmark} />
                     </button>
+                </header>
+                
+                <article className="modal__content" style={{ height: height, width: width }} onClick={(e) => e.stopPropagation()}>
                     {children}
                     {/* TODO: Reimplement the resize handle */}
                     {/* <div className='modal__resize-handle' onMouseDown={handleResizeModal} /> */}

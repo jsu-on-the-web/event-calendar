@@ -3,7 +3,7 @@
 A simple 🗓️ calendar web app for adding and managing 🎆 events.
 
 ## Features
-- [ ] Monthly calendar view
+- [x] Monthly calendar view
 - [ ] Adding events
 - [ ] Deleting events
 - [ ] Viewing events
@@ -21,3 +21,4 @@ A simple 🗓️ calendar web app for adding and managing 🎆 events.
 - Spring Boot
 - GraphQL
 - PostgresSQL
+
