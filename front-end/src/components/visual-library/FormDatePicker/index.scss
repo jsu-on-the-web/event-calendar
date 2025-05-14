@@ -1,0 +1,35 @@
+@import '../../../colors.scss';
+@import '../../../fonts.scss';
+
+.form-date-picker {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    font-family: 'Imprima', sans-serif;
+    color: $black-600;
+    background-color: $white-300;
+    border: 1px solid $black-200;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:focus {
+        border-color: $black-500;
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    }
+
+    &::placeholder {
+        color: $black-300;
+        font-style: italic;
+    }
+
+    &:hover {
+        border-color: $black-400;
+    }
+
+    &:disabled {
+        background-color: $white-500;
+        color: $black-300;
+        cursor: not-allowed;
+    }
+}

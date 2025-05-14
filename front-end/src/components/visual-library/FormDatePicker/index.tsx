@@ -1,11 +1,12 @@
 import React from 'react';
 
 interface FormDatePickerProps {
+    id: string;
+    className?: string;
     selectedDate: Date | null;
-    onDateChange: (date: Date | null) => void;
 }
 
-const FormDatePicker: React.FC<FormDatePickerProps> = ({ selectedDate, onDateChange }) => {
+const FormDatePicker: React.FC<FormDatePickerProps> = ({ id, className, selectedDate, onDateChange }) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const newDate = event.target.value ? new Date(event.target.value) : null;
         onDateChange(newDate);
