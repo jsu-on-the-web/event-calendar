@@ -16,14 +16,12 @@ function App() {
         <p>Hello world!</p>
       </body> */}
       <Calendar setModalPosition={setModalPosition} />
-      {showModal && (<Modal children={(<><p>Magnam non labore amet pariatur. Non voluptas harum et aut dolorum repudiandae vel quisquam. Velit cupiditate quae. Deleniti quod itaque adipisci in qui maiores eos nihil. Voluptatem ut aut esse dolore commodi sed non. Facilis porro qui ad molestiae aut illum magni natus exercitationem.</p>
-        <p>Officia adipisci reiciendis voluptates et ea mollitia qui recusandae. Laboriosam qui aspernatur nesciunt qui nam est voluptatem deserunt. Est fugit totam necessitatibus.</p>
-      </>)} position={modalPosition} onClose={closeModal} />)}
-
-      <AddEventForm onSubmit={(data) => {
+      {showModal && (<Modal children={(<>
+        <AddEventForm onSubmit={(data) => {
         console.log(data);
         closeModal();
       }} />
+      </>)} position={modalPosition} onClose={closeModal} />)}
     </>
   )
 }
