@@ -100,7 +100,7 @@ const Modal = ({ children, height, width, onClose, position }: ModalProps) => {
 
     return ( 
         <div className="modal__overlay" onClick={handleOverlayClick} >
-            <dialog className="w-1/6 modal h-1/3" onClick={onClose} ref={modalRef} onMouseDown={handleDragModal} style={
+            <dialog className="w-1/3 modal h-1/2" onClick={onClose} ref={modalRef} onMouseDown={handleDragModal} style={
                 position? {
                     top: `${position.top}px`,
                     left: `${position.left}px` 

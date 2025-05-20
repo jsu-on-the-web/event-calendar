@@ -1,17 +1,23 @@
 import React, { useState } from 'react';
+import './index.scss';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import FormTextInput from '../visual-library/FormTextInput';
 import FormDatePicker from '../visual-library/FormDatePicker';
 
 interface AddEventFormProps {
-    onSubmit: (event: { title: string; date: string; description: string }) => void;
+    onSubmit: (event: {
+        title: string;
+        begindate: string;
+        enddate?: string;
+        description?: string;
+    }) => void;
 }
 
 interface Inputs {
     title: string;
     begindate: string;
     enddate?: string;
-    description: string;
+    description?: string;
 }
 
 const AddEventForm: React.FC<AddEventFormProps> = ({ onSubmit }) => {
@@ -20,13 +26,13 @@ const AddEventForm: React.FC<AddEventFormProps> = ({ onSubmit }) => {
     const [selectedStartDate, setSelectedStartDate] = useState(null);
     const [selectedEndDate, setSelectedEndDate] = useState(null);
 
-    const handleFormSubmit: SubmitHandler<{ title: string; beginDate: string; endDate: string; description: string; }> = (data) => {
+    const handleFormSubmit: SubmitHandler<Inputs> = (data: Inputs) => {
         onSubmit(data);
         reset();
     }
 
     return (
-        <form onSubmit={handleSubmit(handleFormSubmit)}>
+        <form onSubmit={handleSubmit(handleFormSubmit)} className="add-event-form">
             <label htmlFor="title">Title:</label>
             <FormTextInput id="title" {...register("title", { required: true })} placeholder="Event Title" className='title' required
                 aria-invalid={errors.title? "title" : "false"} />

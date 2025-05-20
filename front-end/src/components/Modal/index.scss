@@ -27,8 +27,8 @@
     top: calc(var(--modal-top) - 10px);
     left: var(--modal-left);
     padding: 10px; /* Add padding around the modal content */
-    min-width: 5vw;
-    min-height: 5vh;
+    min-width: 10vw;
+    min-height: 10vh;
     background-color: $white-300;
     border: 1px solid $black-200;
     display: flex;
