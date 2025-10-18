@@ -1,0 +1,33 @@
+type Event {
+    id: ID!
+    name: String!
+    startDate: String!
+    endDate: String
+    location: String
+    label: Label
+}
+
+type Label {
+    id: ID!
+    name: String!
+    color: String!
+}
+
+# These are our Read ops
+type Query {
+    events: [Event!]!
+    event(id: ID!): Event
+    labels: [Label!]!
+    label(id: ID!): Label
+}
+
+# These are our Write ops
+type Mutation {
+    createEvent(name: String!, startDate: String!, endDate: String, location: String, labelId: ID): Event!
+    updateEvent(id: ID!, name: String, startDate: String, endDate: String, location: String, labelId: ID): Event!
+    deleteEvent(id: ID!): Boolean!
+
+    createLabel(name: String!, color: String!): Label!
+    updateLabel(id: ID!, name: String, color: String): Label!
+    deleteLabel(id: ID!): Boolean!
+}
